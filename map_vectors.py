@@ -43,6 +43,7 @@ def create_matrix():
     W, _ = orthogonal_procrustes(sp_matrix, en_matrix)
     return W
 
+
 def create_matrix_2():
     en_vectors, sp_vectors = [], []
     with open("seed_dict.txt", encoding="utf-8") as f:
@@ -88,19 +89,29 @@ def translate_sp_to_en(word, topn=5):
     best_idx = sims.argsort()[::-1][:topn]
     return [en_model.wv.index_to_key[i] for i in best_idx]
 
-print(translate_sp_to_en("política"))
-print(translate_sp_to_en("servicio"))
-print(translate_sp_to_en("pesca"))
-print(translate_sp_to_en("carta"))
-print(translate_sp_to_en("casa"))
-print(translate_sp_to_en("persona"))
-print(translate_sp_to_en("bueno"))
-print(translate_sp_to_en("fecha"))
-print(translate_sp_to_en("propiedad"))
-print(translate_sp_to_en("junio"))
-print(translate_sp_to_en("firmar"))
-print(translate_sp_to_en("feliz"))
-print(translate_sp_to_en("amor"))
+print("política:", translate_sp_to_en("política"))
+print("servicio:", translate_sp_to_en("servicio"))
+print("pesca:",translate_sp_to_en("pesca"))
+print("carta:",translate_sp_to_en("carta"))
+print("casa:", translate_sp_to_en("casa"))
+print("persona:", translate_sp_to_en("persona"))
+print("bueno:", translate_sp_to_en("bueno"))
+print("fecha:", translate_sp_to_en("fecha"))
+print("propiedad:", translate_sp_to_en("propiedad"))
+print("junio:", translate_sp_to_en("junio"))
+print("firmar:", translate_sp_to_en("firmar"))
+print("feliz:", translate_sp_to_en("feliz"))
+print("amor:", translate_sp_to_en("amor"))
+print("trabajo:", translate_sp_to_en("trabajo"))     # work, job, task, labor
+print("camino:", translate_sp_to_en("camino"))       # road, path, way, journey
+print("pueblo:", translate_sp_to_en("pueblo"))       # town, people, village
+print("juego:", translate_sp_to_en("juego"))         # game, play, match
+print("derecho:", translate_sp_to_en("derecho"))     # right, law, straight
+print("tiempo:", translate_sp_to_en("tiempo"))       # time, weather, era
+print("historia:", translate_sp_to_en("historia"))   # history, story, tale
+print("luz:", translate_sp_to_en("luz"))             # light, lamp, brightness
+print("mesa:", translate_sp_to_en("mesa"))           # table, desk, board
+print("cambio:", translate_sp_to_en("cambio"))           # hand, handwriting, turn
 
 
 # # print(translate_sp_to_en("casa"))

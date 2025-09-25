@@ -21,7 +21,7 @@ def lemmatize_sp_lines(sentences, batch_size=1000):
 
 def lemmatize_en_lines(sentences, batch_size=1000):
     lemmatized = []
-    for doc in nlp_sp.pipe(sentences, batch_size=batch_size):
+    for doc in nlp_en.pipe(sentences, batch_size=batch_size):
         lemmatized.append([token.lemma_.lower() for token in doc if token.is_alpha])
     return lemmatized
 

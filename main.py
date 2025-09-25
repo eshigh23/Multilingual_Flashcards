@@ -1,6 +1,4 @@
-# import spacy
-# from collections import defaultdict
-from gensim.models import Word2Vec
+
 from collections import defaultdict, Counter
 import spacy
 
@@ -112,50 +110,3 @@ write_to_seed_dict(cooc_dict)
 # tokens = [t.lemma_.lower() for t in nlp_en(text) if t.is_alpha and not t.is_stop]
 # print(tokens)
         
-
-def train_models(num_lines):
-    print("training models...")
-    print("training models on europarl text...")
-    sp_sentences = []
-    with open(sp_europarl_text, encoding="utf-8") as sp_f:
-        for i, line in enumerate(sp_f):
-            if num_lines and i >= num_lines:
-                break
-            words = [w.lower() for w in line.strip().split() if w.isalpha()]
-            sp_sentences.append(words)
-
-    en_sentences = []
-    with open(en_europarl_text, encoding="utf-8") as en_f:
-        for i, line in enumerate(en_f):
-            if num_lines and i >= num_lines:
-                break
-            words = [w.lower() for w in line.strip().split() if w.isalpha()]
-            en_sentences.append(words)
-    
-    print("training models on opensubtitles text...")
-    with open(sp_sub_text, encoding="utf-8") as sp_f:
-        for i, line in enumerate(sp_f):
-            if num_lines and i >= 4000000:
-                break
-            words = [w.lower() for w in line.strip().split() if w.isalpha()]
-            sp_sentences.append(words)
-
-    with open(en_sub_text, encoding="utf-8") as en_f:
-        for i, line in enumerate(en_f):
-            if num_lines and i >= 4000000:
-                break
-            words = [w.lower() for w in line.strip().split() if w.isalpha()]
-            en_sentences.append(words)
-
-
-    sp_model = Word2Vec(sp_sentences, vector_size=200, window=5, min_count=4, workers=4)
-    en_model = Word2Vec(en_sentences, vector_size=200, window=5, min_count=4, workers=4)
-
-    print("english vocab length:", len(en_model.wv))  # number of words in English model
-    print("spanish vocab length:", len(sp_model.wv))  # number of words in Spanish model
-
-    sp_model.save("models/sp_model.model")
-    en_model.save("models/en_model.model")
-
-
-train_models(750000)

@@ -120,15 +120,8 @@ def create_cooc_dictionary(en_file, sp_file, num_lines):
 with open("es_en_dict.pkl", "rb") as f:
     sample_dict = pickle.load(f)
 
-casa = (sample_dict["casa"])  # see the Spanish word "casa"
+casa = (sample_dict["teta"])  # see the Spanish word "casa"
 for eng_word, (count, pos, gender) in casa:
     print(f"English word: {eng_word}")
     print(f"Count: {count}, POS: {pos}, Gender: {gender}")
     print("---")
-
-
-
-
-
-
-# write_to_dict(cooc_dict)

@@ -15,6 +15,7 @@ nlp_en = spacy.load("en_core_web_sm")
 nlp_sp = spacy.load("es_core_news_sm")
 
 cooc_dict = defaultdict(dict)
+total_processed = 0
 
 
 # lemmatize batches of sentences using spacy, include morphology
@@ -71,57 +72,91 @@ def write_to_dict(_cooc_dict, output_path="spa_eng_dict.txt", min_count=60):
                 f.write(f"{en_word}\t{sp_word}\t{count}\n") # e.g. dog \t perro \t 61
     print(f"Seed dictionary written to {output_path}")
 
+
+
+        # for i, (en_line, sp_line) in enumerate(zip(en_f, sp_f)):
+        #     if i >= batch_size: break
+        #     # collect sentences from corpus
+        #     en_sentences.append(en_line.strip())    # strip white space
+        #     sp_sentences.append(sp_line.strip())    # strip white space
+
+
 # purpose: create co-occurrence dictionary
 # format: dict[spa][eng] = (count, POS, gender)
 # intuition: associate every word in spa sentence with every word in eng sentence
-def create_cooc_dictionary(en_file, sp_file, num_lines):
-    print('creating cooc dictionary...')
-    en_sentences = []
-    sp_sentences = []
+def create_cooc_dictionary(en_file, sp_file, batch_size, max_lines):
+    global total_processed, cooc_dict
 
-    print('collecting sentences from corpus...')
+    print('creating cooc dictionary...')
+    print('collecting sentences from corpus in batches...')
     with open(en_file, encoding="utf-8") as en_f, open(sp_file, encoding="utf-8") as sp_f:
-        for i, (en_line, sp_line) in enumerate(zip(en_f, sp_f)):
-            if i >= num_lines: break
-            # collect sentences from corpus
-            en_sentences.append(en_line.strip())    # strip white space
-            sp_sentences.append(sp_line.strip())    # strip white space
+        while True:
+            en_sentences, sp_sentences = [], []
 
-    # batch-lemmatize lists of sentences
-    print("lemmatizing english sentences...")
-    en_sentences = lemmatize_en_lines(en_sentences)
-    print("lemmatizing spanish sentences...")
-    sp_sentences = lemmatize_sp_lines(sp_sentences)
+            for _ in range(batch_size):
+                if max_lines and total_processed >= max_lines:
+                    break
+                try:
+                    en_line = next(en_f).strip()
+                    sp_line = next(sp_f).strip()
+                except StopIteration:
+                    break   # breaks out of for loop
 
-    print('creating cooc dictionary...')
-    # build dictionary 
-    for en_sentence, sp_sentence in zip(en_sentences, sp_sentences):
-        for _sp_word in sp_sentence:
-            sp_word, sp_POS, sp_gender = _sp_word   # destructure tuple
-            for en_word in en_sentence:
-                if en_word in cooc_dict[sp_word]:
-                    prev_count, _, _ = cooc_dict[sp_word][en_word]
-                    cooc_dict[sp_word][en_word] = (prev_count + 1, sp_POS, sp_gender)
-                else:
-                    cooc_dict[sp_word][en_word] = (1, sp_POS, sp_gender)
-    
+                en_sentences.append(en_line)
+                sp_sentences.append(sp_line)
+                total_processed += 1
+
+            if not en_sentences:
+                break
+
+            # batch-lemmatize lists of sentences
+            print(f"lemmatizing batch of {len(en_sentences)} english sentences...")
+            en_sentences = lemmatize_en_lines(en_sentences)
+            print(f"Lemmatizing batch of {len(sp_sentences)} spanish sentences...")
+            sp_sentences = lemmatize_sp_lines(sp_sentences)
+
+            print('creating cooc dictionary...')
+            # build dictionary 
+            for en_sentence, sp_sentence in zip(en_sentences, sp_sentences):
+                for _sp_word in sp_sentence:
+                    sp_word, sp_POS, sp_gender = _sp_word   # destructure tuple
+                    for en_word in en_sentence:
+                        if en_word in cooc_dict[sp_word]:
+                            prev_count, _, _ = cooc_dict[sp_word][en_word]
+                            cooc_dict[sp_word][en_word] = (prev_count + 1, sp_POS, sp_gender)
+                        else:
+                            cooc_dict[sp_word][en_word] = (1, sp_POS, sp_gender)
+            print(f"Processed {total_processed} lines so far...")
+
+            # if max_lines is reached, break out of while loop
+            if max_lines is not None and total_processed >= max_lines:
+                break
+
     return cooc_dict
 
 
-# create_cooc_dictionary(en_europarl_text, sp_europarl_text, 10000)
-# create_cooc_dictionary(en_sub_text, sp_sub_text, 10000)
+create_cooc_dictionary(en_europarl_text, sp_europarl_text, 5000, 750000)
+create_cooc_dictionary(en_sub_text, sp_sub_text, 5000, 750000)
 
-# trim_dict(cooc_dict, 5)
+trim_dict(cooc_dict, 5)
 
-# with open('es_en_dict.pkl', "wb") as f:
-#     pickle.dump(cooc_dict, f)
+with open('es_en_dict.pkl', "wb") as f:
+    pickle.dump(cooc_dict, f)
+
+with open("es_en_dict.txt", "w", encoding="utf-8") as f:
+    for sp_word, translations in cooc_dict.items():
+        f.write(f"{sp_word}:\n")
+        for entry in translations:  # now it's a list of tuples
+            en_word, (count, pos, gender) = entry
+            f.write(f"  {en_word} -> count: {count}, POS: {pos}, gender: {gender}\n")
+        f.write("\n")
 
 
-with open("es_en_dict.pkl", "rb") as f:
-    sample_dict = pickle.load(f)
+# with open("es_en_dict.pkl", "rb") as f:
+#     sample_dict = pickle.load(f)
 
-casa = (sample_dict["teta"])  # see the Spanish word "casa"
-for eng_word, (count, pos, gender) in casa:
-    print(f"English word: {eng_word}")
-    print(f"Count: {count}, POS: {pos}, Gender: {gender}")
-    print("---")
+# casa = (sample_dict["teta"])  # see the Spanish word "casa"
+# for eng_word, (count, pos, gender) in casa:
+#     print(f"English word: {eng_word}")
+#     print(f"Count: {count}, POS: {pos}, Gender: {gender}")
+#     print("---")

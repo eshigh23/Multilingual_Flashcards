@@ -29,7 +29,7 @@ export default function CreateCard({ deckId }) {
 
     const addCardToDeck = async (cardId) => {
         try {
-            const responseData = await createCardApi(cardId)
+            const responseData = await createCardApi({ cardId, deckId })
             console.log("responseData:", responseData)
         } catch (e) {
             console.error(e)
@@ -38,9 +38,6 @@ export default function CreateCard({ deckId }) {
 
     return(
         <div>
-        <CreateDeck />
-        <h3>Gonna create a card here</h3>
-
         <input
             type="text"
             value={searchText}

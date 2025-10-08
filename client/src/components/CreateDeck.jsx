@@ -28,7 +28,6 @@ export default function CreateDeck() {
 
     return(
         <div>
-            <h3> Creating le deck </h3>
             <button onClick={() => setIsCreate(true)}> Create new deck </button>
             { isCreate && (
             

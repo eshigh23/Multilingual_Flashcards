@@ -20,3 +20,17 @@ exports.createDeck = async (req, res) => {
         return res.status(400).send()
     }
 }
+
+
+exports.fetchDecks = async (req, res) => {
+    const user = req.user
+
+    try {
+        const decks = await Deck.find({ user: user.id })
+        return res.status(200).json({ decks })
+
+    } catch (e) {
+        console.error(e)
+        return res.status(500).send()
+    }
+}

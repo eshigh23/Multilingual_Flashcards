@@ -15,3 +15,15 @@ export const createDeckApi = async (deckInfo) => {
     }
 }
 
+export const fetchDecksApi = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/fetchDecks`, {
+            withCredentials: true
+        })
+        return response.data
+
+    } catch (e) {
+        throw e
+    }
+}
+

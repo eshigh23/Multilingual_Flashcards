@@ -4,6 +4,7 @@ const cardController = require('../controllers/CardController')
 const requireAuth = require('../middleware/requireAuth')
 
 router.post('/createCard', requireAuth, cardController.createCard)
-router.get('/card/:deckId/cards', requireAuth, cardController.fetchCardsFromDeck)
+router.get('/fetchCards/:deckId', requireAuth, cardController.fetchDueCardsFromDeck)
+router.put('/updateCard', requireAuth, cardController.updateCard)
 
 module.exports = router

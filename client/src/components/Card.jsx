@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { updateCardApi } from '../api/cardApi'
 import CardButton from './CardButton'
 
-export default function Card({ card }) {
+export default function Card({ card, popCard }) {
     const [isFront, setIsFront] = useState(true)
 
     const updateCard = async (e, difficulty) => {
@@ -11,6 +11,12 @@ export default function Card({ card }) {
         try {
             const responseData = await updateCardApi(card._id, difficulty)
             console.log("updated card:", responseData.updatedCard)
+            const updatedCard = responseData.updatedCard
+            const now = new Date()
+            if (now < new Date(updatedCard.nextReview)) {
+                popCard(card._id)
+            }
+            // popCard(card._id)
 
         } catch (e) {
             console.error(e)

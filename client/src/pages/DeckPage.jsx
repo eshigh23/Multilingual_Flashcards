@@ -36,6 +36,20 @@ export default function DeckPage({ deckId }){
 
     }, [deckId])
 
+    const popStudiedCardFromDeck = (cardId) => {
+        console.log("popping card optimistically...")
+        setCards(prevCards => prevCards.filter(card => card._id !== cardId))
+    }
+
+    const addNewCardToDeck = (card) => {
+        console.log("adding card optimistically...", card)
+        setCards(prevCards => [...prevCards, card])
+    }
+
+    useEffect(() => {
+        console.log("new cards:", cards)
+    }, [cards])
+
     return(
         <div className="deck">
             { deck && deckId && (
@@ -70,22 +84,31 @@ export default function DeckPage({ deckId }){
             {/* <CreateCard deckId={deckId} /> */}
             { selectedMode === 'study' ? (
 
+                cards.length > 0 ? (
                 <div className="flashcard--container">
-
-                        <Card key={cards[0]._id} card={cards[0]} />
+                        <Card 
+                            key={cards[0]?._id} 
+                            card={cards[0]} 
+                            popCard={popStudiedCardFromDeck}
+                        />
 
                         <div className="deck--progressbar"></div>
                         <div className="deck--progressbar-options">
                             <p className="deck--num-due">0/ {cards.length} studied</p>
                             <p className="deck--hide-progress">Hide progress bar</p>
                         </div>
- 
                 </div>
+                ): (
+                    <p>You're all caught up!</p>
+                )
                 
             ) : (
                 <div className="deck--create-card">
                     <p className="deck--dictionary-text">Dictionary Search</p>
-                    <CreateCard deckId={deckId} />
+                    <CreateCard 
+                        deckId={deckId}
+                        addCard={addNewCardToDeck}
+                    />
                 </div>
                 
             )}

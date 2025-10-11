@@ -45,7 +45,9 @@ exports.createCard = async (req, res) => {
             nextReview: new Date()
         })
 
-        return res.status(201).json({ message: 'new card created', card})
+        const populatedCard = await card.populate('word')
+
+        return res.status(201).json({ message: 'new card created', card: populatedCard})
 
 
     } catch (e) {

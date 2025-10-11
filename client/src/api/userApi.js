@@ -14,3 +14,25 @@ export const createUserApi = async (userInfo) => {
         throw e
     }
 }
+
+export const fetchUserApi = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/fetchUser`, {
+            withCredentials: true
+        })
+        return response.data
+
+    } catch (e) {
+        throw e
+    }
+}
+
+export const loginUserApi = async (userInfo) => {
+    try {
+        const response = await axios.post(`${API_URL}/loginUser`, userInfo)
+        return response.data
+
+    } catch (e) {
+        throw e
+    }
+}

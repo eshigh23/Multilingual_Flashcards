@@ -1,0 +1,20 @@
+
+.main {
+    /* border: 2px solid purple; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.main--header {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.main--subheader {
+    font-size: 1.75rem;
+    font-weight: 600;
+}

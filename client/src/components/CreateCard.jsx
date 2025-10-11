@@ -1,3 +1,4 @@
+import './CreateCard.css'
 import { useEffect, useState } from "react"
 import {getWordsApi} from "../api/api"
 import { createCardApi } from "../api/cardApi"
@@ -37,29 +38,39 @@ export default function CreateCard({ deckId }) {
     }
 
     return(
-        <div>
-        <input
-            type="text"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-        />
+        <>
+        <div className="createcard--input-wrapper">
+            <input
+                type="text"
+                placeholder="Enter a word..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+            />
+            <p>SP</p>
+        </div>
 
         { searchResults.length > 0 && (
-            searchResults.map(result => (
-            <div 
-                key={result._id}
-                onClick={() => addCardToDeck(result._id)}
-            >
-            { result.translations[0].POS === 'NOUN' && (
-                <span>{result.translations[0].article} </span>
-                ) }
-                <span>{result.sp_word} </span>
-                <span>{result.translations[0].POS.toLowerCase()}: </span>
-                <span>{result.translations[0].en_word.toLowerCase()}</span>
+            <>
+            <div className="createcard--column-headers">
+                <span>Word</span>
+                <span>POS</span>
+                <span>Translation</span>
             </div>
-        ))
+            { searchResults.map(result => (
+                <div
+                    className="createcard--result-wrapper"
+                    key={result._id}
+                    onClick={() => addCardToDeck(result._id)}
+                >
+                    <p>{result.translations[0].article} {result.sp_word} </p>
+                    <p>{result.translations[0].POS.toLowerCase()} </p>
+                    <p>{result.translations[0].en_word.toLowerCase()}</p>
+                </div>
+            ))}
+        </>
       )}
+      
 
-      </div>
+      </>
     )
 }

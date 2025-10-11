@@ -1,0 +1,39 @@
+
+.createcard--input-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid black;
+    border-top: 2px solid black;
+    font-size: 1rem;
+    font-weight: 500;
+    padding-block: .5rem;
+}
+
+.createcard--input-wrapper input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.createcard--result-wrapper,
+.createcard--column-headers {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: flex-start; /* centers inline content in each column */
+    align-items: center;   /* optional, vertical centering */
+    border-bottom: 1px solid #8B8B8B;
+    padding-block: .75rem;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.createcard--column-headers {
+    font-weight: 600;
+}

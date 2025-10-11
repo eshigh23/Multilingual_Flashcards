@@ -1,13 +1,15 @@
+import './DeckSidebar.css'
 import CreateDeck from '../components/CreateDeck'
 
 /* accepts fetched decks from DashboardLayout.jsx */
 export default function DeckSidebar({ decks, setSelectedDeckId }){
 
     return(
-        <div>
-            <p>Deck list</p>
+        <div className="decksidebar">
+            <p className="sidebar--header">My Decks</p>
             { decks && decks.map((deck, i) => (
-                <p 
+                <p
+                    className="sidebar--deckname" 
                     key={i}
                     onClick={() => setSelectedDeckId(deck._id)}
                 >

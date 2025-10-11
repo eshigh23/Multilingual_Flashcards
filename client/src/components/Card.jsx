@@ -1,5 +1,7 @@
+import './Card.css'
 import { useEffect, useState } from 'react'
 import { updateCardApi } from '../api/cardApi'
+import CardButton from './CardButton'
 
 export default function Card({ card }) {
     const [isFront, setIsFront] = useState(true)
@@ -17,19 +19,25 @@ export default function Card({ card }) {
 
 
     return (
-        <div onClick={() => setIsFront(prev => !prev)}>
-            <h3>Card</h3>
+        <div
+            className="flashcard"
+            onClick={() => setIsFront(prev => !prev)}>
 
             { isFront ? (
-                <h3>{card.word.sp_word}</h3>
+                <div className="flashcard--content">
+                    <p className="flashcard--word">{card.word.sp_word}</p>
+                </div>
             ) : (
-                <h3>{card.word.translations[0].en_word}</h3>
+                <div className="flashcard--content">
+                    <p className="flashcard--word">{card.word.translations[0].en_word}</p>
+                </div>
             )}
-
-            <button onClick={(e)=> updateCard(e, 'forgot')}>Forgot</button>
-            <button onClick={(e)=> updateCard(e, 'hard')}>Hard</button>
-            <button onClick={(e)=> updateCard(e, 'okay')}>Okay</button>
-            <button onClick={(e)=> updateCard(e, 'easy')}>Easy</button>
+            <div className="flashcard--buttons">
+                <CardButton color='red' onClick={(e)=> updateCard(e, 'forgot')}>Forgot</CardButton>
+                <CardButton color='orange' onClick={(e)=> updateCard(e, 'hard')}>Hard</CardButton>
+                <CardButton color='green' onClick={(e)=> updateCard(e, 'okay')}>Okay</CardButton>
+                <CardButton color='blue' onClick={(e)=> updateCard(e, 'easy')}>Easy</CardButton>
+            </div>
         </div>
     )
 }

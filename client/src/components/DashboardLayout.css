@@ -2,12 +2,46 @@
 .dashboard-layout {
     display: grid;
     width: 100%;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr 1fr;
+    grid-template-areas:
+      "navbar"
+      "main"
+      "sidebar";
     height: 100vh;
     overflow: hidden;
-    border: 2px solid red;
+    /* border: 2px solid red; */
+    box-sizing: border-box;
 }
 
 .dashboard-layout > * {
-  border: 1px dashed blue; /* 🔵 outlines each grid item */
+  /* border: 1px dashed blue;  */
+  box-sizing: border-box;
+}
+
+.navbar {
+  grid-area: navbar;
+  /* border: 2px solid purple; */
+}
+
+.decksidebar {
+  grid-area: sidebar;
+}
+
+.main {
+  grid-area: main;
+  /* border: 2px solid purple; */
+}
+
+
+
+@media (min-width: 500px) {
+  .dashboard-layout {
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas:
+      "navbar navbar"
+      "sidebar main"
+  }
+
 }

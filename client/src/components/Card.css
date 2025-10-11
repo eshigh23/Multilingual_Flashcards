@@ -1,0 +1,66 @@
+
+.flashcard--container{
+    margin-top: 1em;
+    /* border: 2px solid purple; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    flex: 1;
+}
+
+.flashcard {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    width: 95%;
+    border: 1px solid black;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.63);
+} 
+
+.flashcard--content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* fill available vertical space */
+}
+
+.flashcard--word {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.flashcard--buttons {
+    display: flex;
+    justify-content: space-around; /* or center, if you prefer */
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.flashcard--button {
+    border: 1px solid #595959;
+    border-radius: 15px;
+    width: 24%;
+    padding: .75em 1.25em;
+    font-weight: 600;
+    font-size: 0.87rem;
+    cursor: pointer;
+}
+
+.flashcard--button.red {
+    background-color: #FFD3D3;
+}
+
+.flashcard--button.orange {
+    background-color: #FFE9D3;
+}
+
+.flashcard--button.green {
+    background-color: #E0F6D9;
+}
+
+.flashcard--button.blue {
+    background-color: #D3F4ED;
+}

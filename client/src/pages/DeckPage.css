@@ -1,0 +1,94 @@
+
+.deck {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid blue; */
+    height: 100%;
+    width: 100%;
+}
+.deck--name {
+    font-size: 1.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deck--header {
+    margin-top: 3rem;
+}
+
+.deck--preheaders {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.deck--preheader {
+    display: flex;
+    gap: .25rem;
+    align-items: center;
+    cursor: pointer;
+}
+
+.deck--preheader p {
+    font-size: .81rem;
+    color: #7C7C7C;
+    font-weight: 500;
+}
+
+.deck--buttons {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+}
+
+.deck--buttons p {
+    flex: 1;
+    text-align: center;
+    padding-block: .25em;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border: 1px solid #EAEAEA;
+}
+
+.deck--buttons p.active {
+    background-color: #EFFBEF;
+}
+
+.deck--progressbar {
+    margin-top: 1rem;
+    width: 95%;
+    height: 15px;
+    border: 2px solid #616161;
+    border-radius: 15px;
+}
+
+.deck--progressbar-options {
+    display: flex;
+    margin-top: .5rem;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deck--num-due {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.deck--hide-progress {
+    font-size: .7rem;
+    color: #7C7C7C;
+}
+
+.deck--create-card{
+    margin-top: 1rem;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.deck--dictionary-text {
+    font-size: 1.125rem;
+    font-weight: 500;
+}

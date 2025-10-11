@@ -1,6 +1,7 @@
 const Entry = require('../models/DictionaryEntry.js')
 const User = require('../models/User.js')
 const Card = require('../models/Card.js')
+const Deck = require('../models/Deck.js')
 
 /*
     word: { type: Schema.Types.ObjectId, ref: 'Word', required: true },
@@ -18,7 +19,7 @@ const Card = require('../models/Card.js')
 exports.createCard = async (req, res) => {
     const user = req.user
     const { cardId, deckId } = req.body
-    console.log("user:", user, "cardId:", cardId)
+    console.log("user:", user, "cardId:", cardId, "deckId:", deckId)
 
     try {
         // validate user in db
@@ -29,7 +30,6 @@ exports.createCard = async (req, res) => {
 
         // validate card in db
         const entry = await Entry.findById(cardId)
-        console.log("um entry??", entry)
         if (!entry) {
             return res.status(404).json({ message: 'Word not found' })
         }
@@ -68,13 +68,16 @@ exports.fetchDueCardsFromDeck = async (req, res) => {
 
         const now = new Date()
 
+        const deck = await Deck.findById(deckId)
+        // @todo check here that deck exists
+
         // fetch all cards for a deck less than or equal to new date
         const cards = await Card.find({ 
             deck: deckId,
             nextReview: { $lte: now }
 
         }).populate('word')
-        return res.status(200).json({ cards })
+        return res.status(200).json({ deck, cards })
 
     } catch (e) {
         console.error(e)

@@ -65,7 +65,9 @@ export default function DeckPage({ deckId }){
                         <p>Deck settings</p>
                     </div>
                 </div>
+
                 <p className="deck--name">{deck.name}</p>
+                
                 <div className="deck--buttons">
                     <div className="deck--button-container">
                         <div 
@@ -114,7 +116,6 @@ export default function DeckPage({ deckId }){
                 
             ) : (
                 <div className="deck--create-card">
-                    <p className="deck--dictionary-text">Dictionary Search</p>
                     <CreateCard 
                         deckId={deckId}
                         addCard={addNewCardToDeck}

@@ -1,6 +1,30 @@
 
+.createcard {
+    width: 100%;
+    max-width: 750px;
+    /* border: 2px solid blue; */
+}
+
+.createcard--dictionary-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2vh;
+    align-self: flex-start;
+}
+
+.createcard--flashcard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.createcard--flashcard {
+    width: 100%;
+    margin-top: 1vh;
+    margin-bottom: 5vh;
+} 
+
 .createcard--input-wrapper {
-    margin-top: .5rem;
+    /* border: 5px solid red; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,9 +62,11 @@
 
 .createcard--result-wrapper {
     background-color: #FBFBFB;
+    cursor: pointer;
 }
 
 .createcard--column-headers {
+    border-top: 1px solid black;
     font-weight: 600;
 }
 
@@ -50,4 +76,19 @@
     background-color: #F9F9F9;
     padding: .2em .5em;
     cursor: pointer;
+}
+
+@media (min-width: 1028px) {
+
+    .createcard--flashcard {
+        margin: auto;
+        border: 1px solid black;
+        border-radius: 12px;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.63);
+    }
+
+    .createcard--input-wrapper {
+        border: none;
+        /* border-bottom: 1px solid black; */
+    }
 }

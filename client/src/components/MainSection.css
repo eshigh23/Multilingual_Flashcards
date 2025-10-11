@@ -1,13 +1,14 @@
 
 .main {
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
     display: flex;
     height: 100%;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
     gap: 2rem;
     min-height: 600px;
+    overflow-y: auto;
 }
 
 .main--header {

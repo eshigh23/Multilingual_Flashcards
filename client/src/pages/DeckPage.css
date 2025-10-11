@@ -9,13 +9,21 @@
 
 }
 .deck--name {
+    display: block;
     font-size: 1.75rem;
     font-weight: 500;
     text-transform: capitalize;
 }
 
 .deck--header {
+    display: flex;
+    flex-direction: column;
     margin-top: 3rem;
+    /* border: 1px solid red; */
+    text-align: center;
+    gap: .5em;
+
+
 }
 
 .deck--preheaders {
@@ -101,34 +109,34 @@
 }
 
 .deck--create-card{
+    /* border: 1px solid orange; */
     margin-top: 1rem;
-    /* border: 1px solid red; */
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+    align-items: center;
 }
 
 /* hide scrollbar (works across browsers) */
 .deck--create-card::-webkit-scrollbar {
   display: none;
 }
+
 .deck--create-card {
   scrollbar-width: none; /* Firefox */
 }
 
-.deck--dictionary-text {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-}
+
 
 
 @media (min-width: 1028px) {
     .deck--preheaders {
         justify-content: start;
+    }
+
+    .deck--header {
+        text-align: start;
+        margin-inline: 1rem;
     }
 
     .deck--buttons {
@@ -164,10 +172,12 @@
         border-top: 1px solid #BFBFBF;
     }
 
-    /* .deck--buttons div.active {
-        height: 5px;
-        background-color: #EFFBEF;
-        width: 100%;
-        border-top: 1px solid #BFBFBF;
-    } */
+    .deck--dictionary-text {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: auto;
+        margin-top: 2vh;
+        align-self: flex-start;
+    }   
+
 }

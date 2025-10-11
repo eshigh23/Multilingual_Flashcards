@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+body {
+  min-width: 360px;
+}
+
 html, body {
   margin: 0;
   padding: 0;

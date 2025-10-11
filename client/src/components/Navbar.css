@@ -18,3 +18,29 @@
     max-width: 250px;
     gap: 1.5rem;
 }
+
+.desktop--only {
+    display: none;
+}
+
+
+@media (min-width: 1028px) {
+
+    .mobile--only {
+        display: none;
+    }
+    .desktop--only {
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .navbar--icons {
+        gap: .5rem;
+    }
+
+    .desktop--only p{
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+}

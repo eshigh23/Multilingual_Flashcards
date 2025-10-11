@@ -40,38 +40,38 @@ export default function CreateCard({ deckId, addCard }) {
 
     return(
         <>
-        <div className="createcard--input-wrapper">
-            <input
-                type="text"
-                placeholder="Enter a word..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-            />
-            <p>SP</p>
-        </div>
-
-        { searchResults.length > 0 && (
-            <>
-            <div className="createcard--column-headers">
-                <span>Word</span>
-                <span>POS</span>
-                <span>Translation</span>
-            </div>
-            { searchResults.map(result => (
-                <div
-                    className="createcard--result-wrapper"
-                    key={result._id}
-                    onClick={() => addCardToDeck(result._id)}
-                >
-                    <p>{result.translations[0].article} {result.sp_word} </p>
-                    <p>{result.translations[0].POS.toLowerCase()} </p>
-                    <p>{result.translations[0].en_word.toLowerCase()}</p>
+            <div className="createcard--input-wrapper">
+                <input
+                    type="text"
+                    placeholder="Enter a word..."
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                />
+                <div className="createcard--lang">
+                    <p>SP</p>
                 </div>
-            ))}
-        </>
-      )}
-      
+            </div>
 
+            { searchResults.length > 0 && (
+                <>
+                <div className="createcard--column-headers">
+                    <span>Word</span>
+                    <span>POS</span>
+                    <span>Translation</span>
+                </div>
+                { searchResults.map(result => (
+                    <div
+                        className="createcard--result-wrapper"
+                        key={result._id}
+                        onClick={() => addCardToDeck(result._id)}
+                    >
+                        <p>{result.translations[0].article} {result.sp_word} </p>
+                        <p>{result.translations[0].POS.toLowerCase()} </p>
+                        <p>{result.translations[0].en_word.toLowerCase()}</p>
+                    </div>
+                ))}
+                </>
+            )}
       </>
     )
 }

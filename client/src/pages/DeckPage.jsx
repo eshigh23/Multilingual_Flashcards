@@ -5,7 +5,7 @@ import CreateCard from '../components/CreateCard'
 import { createDeckApi, fetchDecksApi } from '../api/deckApi'
 import { fetchDueCardsFromDeckApi } from '../api/cardApi'
 import Card from '../components/Card'
-import { CirclePause, Settings } from 'lucide-react'
+import { BookOpen, CirclePause, CirclePlus, Settings } from 'lucide-react'
 
 
 
@@ -67,17 +67,27 @@ export default function DeckPage({ deckId }){
                 </div>
                 <p className="deck--name">{deck.name}</p>
                 <div className="deck--buttons">
-                    <p
-                        className={selectedMode === 'study' ? 'active' : ''}
-                        onClick={() => setSelectedMode('study')}>
-                            Study
-                    </p>
-                    <p
-                        className={selectedMode === 'add' ? 'active' : ''}
-                        onClick={() => setSelectedMode('add')}
-                    >
-                        Add words
-                    </p>
+                    <div className="deck--button-container">
+                        <div 
+                            className={`deck--button ${selectedMode === 'study' ? 'active' : ''}`}
+                            onClick={() => setSelectedMode('study')}
+                        >
+                                <BookOpen color="black"/>
+                                <p>Study</p>
+                        </div>
+                        <div className={`deck--underline ${selectedMode==='study' ? 'active' : ''}`}></div>
+                    </div>
+              
+                    <div className="deck--button-container">
+                        <div 
+                            className={`deck--button ${selectedMode === 'add' ? 'active' : ''}`}
+                            onClick={() => setSelectedMode('add')}
+                        >
+                            <CirclePlus color="black"/>
+                            <p>Add words</p>
+                        </div>
+                        <div className={`deck--underline ${selectedMode==='add' ? 'active' : ''}`}></div>
+                    </div>
                 </div>
             </div>
 

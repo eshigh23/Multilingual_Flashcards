@@ -1,5 +1,7 @@
+import './CreateDeck.css'
 import { useEffect, useState } from 'react'
 import { createDeckApi } from '../api/deckApi'
+import { CirclePlus } from 'lucide-react'
 
 export default function CreateDeck() {
     
@@ -28,7 +30,14 @@ export default function CreateDeck() {
 
     return(
         <div>
-            <button onClick={() => setIsCreate(true)}> Create new deck </button>
+            <div 
+                className="createdeck--new-button"
+                onClick={() => setIsCreate(true)}
+            > 
+                    
+                    <CirclePlus size={25} color={'black'} backgroundColor={'white'}/> 
+                    <p>Create new deck</p>
+            </div>
             { isCreate && (
             
                 <form onSubmit={createDeck}>

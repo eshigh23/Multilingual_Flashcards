@@ -1,3 +1,4 @@
+import './AuthForm.css'
 import { useEffect, useState } from "react"
 import { loginUserApi } from "../api/userApi"
 import { useAuth } from "../context/UserContext"
@@ -22,20 +23,24 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={loginForm}>
+        <form className="authform" onSubmit={loginForm}>
+            <label className="authLabel"> Username:
                 <input
+                    className="authInput"
                     type="text"
-                    placeholder="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
+            </label>
+            <label className="authLabel"> Password:
                 <input
+                    className="authInput"
                     type="password"
-                    placeholder="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button>Submit</button>
+            </label>
+                <button className="authButton">Log in</button>
             </form>
     )
 }

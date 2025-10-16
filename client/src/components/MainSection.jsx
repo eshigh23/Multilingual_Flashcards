@@ -7,7 +7,7 @@ export default function MainSection({ deckId }){
     const { user } = useAuth()
 
     return (
-        <div className="main">
+        <div >
             { !deckId ? (
                 <Welcome
                     user={user}

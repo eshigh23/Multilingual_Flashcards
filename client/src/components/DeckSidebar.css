@@ -1,6 +1,7 @@
 
 .decksidebar {
     display: flex;
+    height: 100%;
     justify-content: center;
     flex-direction: column;
     gap: 1.5rem;

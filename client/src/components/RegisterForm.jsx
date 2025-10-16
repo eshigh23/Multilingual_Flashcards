@@ -1,3 +1,4 @@
+import './AuthForm.css'
 import { useState } from 'react'
 import { createUserApi } from '../api/userApi'
 
@@ -19,32 +20,44 @@ export default function RegisterForm(){
     }
 
     return (
-        <form onSubmit={submitForm}>
-            <input
-                type="text"
-                placeholder="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="email"
-                placeholder="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="confirm password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button>Submit</button>
+        <form className="authform" onSubmit={submitForm}>
+            <label className="authLabel">
+                <input
+                    className="authInput"
+                    type="text"
+                    placeholder="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </label>
+            <label className="authLabel">
+                <input
+                    className="authInput"
+                    type="email"
+                    placeholder="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </label>
+            <label className="authLabel">
+                <input
+                    className="authInput"
+                    type="password"
+                    placeholder="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </label>
+            <label className="authLabel">
+                <input
+                    className="authInput"
+                    type="password"
+                    placeholder="confirm password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </label>
+            <button className="authButton">Sign up</button>
         </form>
     )
 }

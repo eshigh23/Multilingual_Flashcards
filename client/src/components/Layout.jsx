@@ -1,13 +1,14 @@
-import './DashboardLayout.css'
+import './Layout.css'
 import { useEffect, useState } from 'react'
 import DeckSidebar from './DeckSidebar';
 import MainSection from './MainSection';
 import DeckPage from '../pages/DeckPage';
 import Navbar from './Navbar';
 import { fetchDecksApi } from '../api/deckApi';
+import { Outlet } from 'react-router-dom';
 
 
-export default function DashboardLayout() {
+export default function Layout() {
     const [decks, setDecks] = useState([]);
     const [selectedDeckId, setSelectedDeckId] = useState(null);
 
@@ -32,13 +33,18 @@ export default function DashboardLayout() {
     return (
         <div className="dashboard-layout">
             <Navbar />
-            <DeckSidebar
-                decks={decks}
-                setSelectedDeckId={setSelectedDeckId}
+
+            <aside className="decksidebar--wrapper">
+                <DeckSidebar
+                    decks={decks}
+                    setSelectedDeckId={setSelectedDeckId}
             />
-            <MainSection
-                deckId={selectedDeckId} 
-            />
+            </aside>
+
+
+            <main className="main">
+                <Outlet />
+            </main>
         </div>
     )
 }

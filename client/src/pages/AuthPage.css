@@ -1,0 +1,43 @@
+
+.authpage {
+    height: 100%;
+    background-color: #EFFBEF;
+    width: 500px;
+    max-width: 800px;
+    border: 1px solid blue;
+    /* margin: auto; */
+}
+
+.authpage--headers {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    margin-top: 10vh;
+    gap: 1rem;
+    /* border: 1px solid black; */
+}
+
+.authpage--headers-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authpage--headers p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+    margin-bottom: .75rem;
+}
+
+.authpage--active {
+    width: 100%;
+    height: 5px;
+    background-color: #838383;
+    border: 1px solid black;
+    border-radius:5px;
+}

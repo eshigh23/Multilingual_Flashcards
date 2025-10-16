@@ -1,4 +1,4 @@
-import DashboardLayout from "../components/DashboardLayout";
+import DashboardLayout from "../components/Layout";
 
 export default function DashboardPage(){
     return(

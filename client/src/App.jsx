@@ -1,11 +1,9 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthPage from './pages/authPage';
-import CreateCard from './pages/CreateCard';
 import DeckPage from './pages/DeckPage';
-import DashboardPage from './pages/DashboardPage';
-import Navbar from './components/Navbar';
 import Layout from './components/Layout';
+import Welcome from './components/Welcome';
 
 
 
@@ -15,18 +13,12 @@ function App() {
     <Router>
       <Routes>
         <Route element={<Layout />}>
+            <Route path="/" element={<Welcome />} />
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/deck/:deckId" element={<DeckPage />} />
         </Route> 
       </Routes>
     </Router>
-
-    // <Router>
-    //   {/* <Navbar /> */}
-    //   <Routes>
-    //     <Route path="/" element={<DashboardPage />} />
-    //     <Route path="/auth" element={<AuthPage />} />
-    //   </Routes>
-    // </Router>
   )
 }
 

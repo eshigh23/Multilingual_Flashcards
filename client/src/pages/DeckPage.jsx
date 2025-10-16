@@ -6,16 +6,19 @@ import { createDeckApi, fetchDecksApi } from '../api/deckApi'
 import { fetchDueCardsFromDeckApi } from '../api/cardApi'
 import Card from '../components/Card'
 import { BookOpen, CirclePause, CirclePlus, Settings } from 'lucide-react'
+import { useParams } from 'react-router-dom'
 
 
 
 // takes deck info as parameter
 // displays cards to be reviewed, or creates cards for deck?, 
 // see all cards in the deck, deck settings, etc...
-export default function DeckPage({ deckId }){
+export default function DeckPage(){
+    const { deckId } = useParams()
 
     const [deck, setDeck] = useState(null)
     const [cards, setCards] = useState([])
+    const [numDue, setNumDue] = useState(null)
     const [selectedMode, setSelectedMode] = useState("study")
 
 
@@ -26,8 +29,10 @@ export default function DeckPage({ deckId }){
                 const responseData = await fetchDueCardsFromDeckApi(deckId)
                 setCards(responseData.cards ? responseData.cards : [])
                 setDeck(responseData.deck ? responseData.deck : null)
+                setNumDue(responseData.numDue ? responseData.numDue : null)
                 console.log("cards:", responseData.cards)
                 console.log("deck", responseData.deck)
+                console.log("num due:", responseData.numDue)
             } catch (e) {
                 console.error(e)
             }
@@ -103,12 +108,21 @@ export default function DeckPage({ deckId }){
                             card={cards[0]} 
                             popCard={popStudiedCardFromDeck}
                         />
+                        {numDue && (
+                            <>
+                                <div className="deck--progressbar">
+                                    <div 
+                                        className="deck--progressbar-fill"
+                                        style={{ width: `${numDue > 0 ? ((numDue - cards.length) / numDue) * 100 : 0}%` }}
+                                    ></div>
+                                </div>
+                                <div className="deck--progressbar-options">
+                                    <p className="deck--num-due">{numDue - cards.length}/ {numDue} studied</p>
+                                    <p className="deck--hide-progress">Hide progress bar</p>
+                                </div>
+                            </>
+                        )}
 
-                        <div className="deck--progressbar"></div>
-                        <div className="deck--progressbar-options">
-                            <p className="deck--num-due">0/ {cards.length} studied</p>
-                            <p className="deck--hide-progress">Hide progress bar</p>
-                        </div>
                 </div>
                 ): (
                     <p>You're all caught up!</p>

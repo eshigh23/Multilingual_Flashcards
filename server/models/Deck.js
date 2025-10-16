@@ -7,6 +7,7 @@ const deckSchema = new Schema({
     nativeLanguage: { type: String },
     targetLanguage: { type: String, required: true },
     direction: { type: String, enum: ['src-dst', 'dst-src'], default: 'src-dst'},
+    numDueToday: { type: Number}
 
 }, { timestamps: true })
 

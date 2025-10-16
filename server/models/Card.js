@@ -10,7 +10,8 @@ const cardSchema = new Schema({
     easinessFactor: { type: Number, default: 2.5 },
     repetitions: { type: Number, default: 0 },
     interval: { type: Number, default: 1},
-    nextReview: { type: Date }
+    nextReview: { type: Date },
+    lastReviewedAt: { type: Date }
 }, { timestamps: true })
 
 const Card = mongoose.model('Card', cardSchema)

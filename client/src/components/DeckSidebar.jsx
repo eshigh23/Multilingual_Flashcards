@@ -1,10 +1,16 @@
 import './DeckSidebar.css'
 import CreateDeck from '../components/CreateDeck'
+import { useNavigate } from 'react-router-dom'
 
 
 
 /* accepts fetched decks from DashboardLayout.jsx */
 export default function DeckSidebar({ decks, setSelectedDeckId }){
+    const navigate = useNavigate()
+
+    const navigateToDeck = (deckId) => {
+        navigate(`/deck/${deckId}`)
+    }
 
     return(
         <div className="decksidebar">
@@ -16,7 +22,7 @@ export default function DeckSidebar({ decks, setSelectedDeckId }){
                     <p
                         className="sidebar--deckname" 
                         key={i}
-                        onClick={() => setSelectedDeckId(deck._id)}
+                        onClick={() => navigateToDeck(deck._id)}
                     >
                         {deck.name}</p>
                 ))}

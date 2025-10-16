@@ -79,7 +79,12 @@ exports.fetchDueCardsFromDeck = async (req, res) => {
             nextReview: { $lte: now }
 
         }).populate('word')
-        return res.status(200).json({ deck, cards })
+
+        const numStudiedToday = await calculateCardsStudiedToday(deckId)
+        console.log("NUM STUDIED TODAYYY:", numStudiedToday)
+        const dueToday = cards.length + numStudiedToday
+
+        return res.status(200).json({ deck, cards, numDue: dueToday })
 
     } catch (e) {
         console.error(e)
@@ -97,6 +102,7 @@ exports.updateCard = async (req, res) => {
         }
 
         const updatedCard = calculatedSpacedRepetition(card, difficulty)
+        card.lastReviewedAt = new Date()
         await card.save()
 
         return res.status(200).json({ updatedCard })
@@ -107,6 +113,22 @@ exports.updateCard = async (req, res) => {
     }
 }
 
+const calculateCardsStudiedToday = async (deckId) => {
+
+    const startOfDay = new Date()
+    const endOfDay = new Date()
+
+    startOfDay.setHours(0, 0, 0, 0)
+    endOfDay.setHours(23, 59, 59, 999)
+
+    const studiedToday = await Card.find({
+        deck: deckId,
+        lastReviewedAt: { $gte: startOfDay, $lte: endOfDay },
+        nextReview: { $gt: endOfDay },
+    }).select('_id')
+
+    return studiedToday.length
+}
 
 const calculatedSpacedRepetition = (card, difficulty) => {
     const difficultyMap = { 'forgot': 0, 'hard': 1.5, 'okay': 3, 'easy': 4.5 }

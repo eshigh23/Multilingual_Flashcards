@@ -80,7 +80,7 @@
 }
 
 .deck--progressbar {
-    margin-top: 1rem;
+    margin-top: 5vh;
     width: 95%;
     height: 15px;
     border: 2px solid #616161;
@@ -113,7 +113,11 @@
 .deck--hide-progress {
     font-size: .7rem;
     color: #7C7C7C;
+    cursor: pointer;
+}
 
+.deck--show-progress {
+    justify-content: flex-end;
 }
 
 .deck--create-card{

@@ -20,6 +20,7 @@ export default function DeckPage(){
     const [cards, setCards] = useState([])
     const [numDue, setNumDue] = useState(null)
     const [selectedMode, setSelectedMode] = useState("study")
+    const [isProgressBar, setIsProgressBar] = useState(true)
 
 
     // default behavior: fetch all cards that are due for review
@@ -108,7 +109,7 @@ export default function DeckPage(){
                             card={cards[0]} 
                             popCard={popStudiedCardFromDeck}
                         />
-                        {numDue && (
+                        {numDue && isProgressBar ? (
                             <>
                                 <div className="deck--progressbar">
                                     <div 
@@ -118,9 +119,19 @@ export default function DeckPage(){
                                 </div>
                                 <div className="deck--progressbar-options">
                                     <p className="deck--num-due">{numDue - cards.length}/ {numDue} studied</p>
-                                    <p className="deck--hide-progress">Hide progress bar</p>
+                                    <p 
+                                        className="deck--hide-progress"
+                                        onClick={() => setIsProgressBar(false)}>Hide progress bar</p>
                                 </div>
                             </>
+                        ) : (
+                            <div className="deck--progressbar-options">
+                                <p></p>
+                                <p 
+                                    className="deck--hide-progress"
+                                    onClick={() => setIsProgressBar(true)}> Show progress bar
+                                </p>
+                            </div>
                         )}
 
                 </div>

@@ -38,16 +38,16 @@ exports.createCard = async (req, res) => {
 
         // @todo: validate dictionaryentry in db
 
-        const card = await Card.create({
+        await Card.create({
             user: _user._id,
             word: entry._id,
             deck: deckId,
             nextReview: new Date()
         })
 
-        const populatedCard = await card.populate('word')
+        const {deck, cards: updatedCards, numDue} = await getDueCardsFromDeckService(deckId)
 
-        return res.status(201).json({ message: 'new card created', card: populatedCard})
+        return res.status(201).json({ message: 'new card created', deck, updatedCards, numDue })
 
 
     } catch (e) {
@@ -59,15 +59,28 @@ exports.createCard = async (req, res) => {
 exports.fetchDueCardsFromDeck = async (req, res) => {
     try {
         const _user = req.user
-        console.log("user:", _user)
+        // console.log("user:", _user)
         const { deckId } = req.params
-        console.log("deckId:", deckId)
+        // console.log("deckId:", deckId)
 
         const user = await User.findById(_user.id)
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
 
+        const { deck, cards, numDue } = await getDueCardsFromDeckService(deckId)
+
+        return res.status(200).json({ deck, cards, numDue})
+
+    } catch (e) {
+        console.error(e)
+        return res.status(500).send()
+    }
+}
+
+const getDueCardsFromDeckService = async (deckId) => {
+    
+    try {
         const now = new Date()
 
         const deck = await Deck.findById(deckId)
@@ -84,13 +97,13 @@ exports.fetchDueCardsFromDeck = async (req, res) => {
         console.log("NUM STUDIED TODAYYY:", numStudiedToday)
         const dueToday = cards.length + numStudiedToday
 
-        return res.status(200).json({ deck, cards, numDue: dueToday })
+        return {deck, cards, numDue: dueToday}
 
     } catch (e) {
-        console.error(e)
-        return res.status(400).send()
+        throw new Error('Couldnt fetch cards from deck')
     }
 }
+
 
 exports.updateCard = async (req, res) => {
     try {

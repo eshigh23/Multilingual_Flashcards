@@ -18,7 +18,7 @@ export default function DeckPage(){
 
     const [deck, setDeck] = useState(null)
     const [cards, setCards] = useState([])
-    const [numDue, setNumDue] = useState(null)
+    const [numDue, setNumDue] = useState(cards?.length || null)
     const [selectedMode, setSelectedMode] = useState("study")
     const [isProgressBar, setIsProgressBar] = useState(true)
 
@@ -144,6 +144,9 @@ export default function DeckPage(){
                     <CreateCard 
                         deckId={deckId}
                         addCard={addNewCardToDeck}
+                        setCards={setCards}
+                        setDeck={setDeck}
+                        setNumDue={setNumDue}
                     />
                 </div>
                 

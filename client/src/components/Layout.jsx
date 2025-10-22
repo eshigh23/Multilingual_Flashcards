@@ -9,12 +9,7 @@ import { Outlet } from 'react-router-dom';
 
 
 export default function Layout() {
-    const [decks, setDecks] = useState([]);
-    const [selectedDeckId, setSelectedDeckId] = useState(null);
-
-    useEffect(() => {
-        console.log('deck:', decks)
-    }, [decks])
+    const [decks, setDecks] = useState([])
 
     // fetch all decks for a user
     useEffect(() => {
@@ -29,21 +24,19 @@ export default function Layout() {
         }
         fetchDecks()
     }, [])
-
+ 
     return (
         <div className="dashboard-layout">
-            <Navbar />
 
             <aside className="decksidebar--wrapper">
                 <DeckSidebar
-                    decks={decks}
-                    setSelectedDeckId={setSelectedDeckId}
-            />
+                    decks={decks} 
+                />
             </aside>
 
 
             <main className="main">
-                <Outlet />
+                <Outlet context={{ decks, setDecks }} />
             </main>
         </div>
     )

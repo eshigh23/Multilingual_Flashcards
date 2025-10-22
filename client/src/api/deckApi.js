@@ -20,7 +20,7 @@ export const fetchDecksApi = async () => {
         const response = await axios.get(`${API_URL}/fetchDecks`, {
             withCredentials: true
         })
-        return response.data
+        return response.data    // contains
 
     } catch (e) {
         throw e

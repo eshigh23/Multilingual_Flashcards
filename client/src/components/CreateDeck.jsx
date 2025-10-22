@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { createDeckApi } from '../api/deckApi'
 import { CirclePlus } from 'lucide-react'
 
-export default function CreateDeck() {
+export default function CreateDeck({ decks, setDecks }) {
     
     const [user, setUser] = useState(null)
     const [isCreate, setIsCreate] = useState(false)
@@ -20,7 +20,9 @@ export default function CreateDeck() {
         try {
             const responseData = await createDeckApi({ deckName, selectedLanguage })
             console.log("deck created!")
-            console.log("responseData:", responseData)
+            console.log("responseData in createDeck:", responseData)
+            // 
+            setDecks(responseData.updatedDecks)
 
         } catch (e) {
             console.error(e)
@@ -35,7 +37,7 @@ export default function CreateDeck() {
                 onClick={() => setIsCreate(true)}
             > 
                     
-                    <CirclePlus size={25} color={'black'} backgroundColor={'white'}/> 
+                    <CirclePlus size={25} color={'black'}/> 
                     <p>Create new deck</p>
             </div>
             { isCreate && (

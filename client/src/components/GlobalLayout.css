@@ -1,0 +1,23 @@
+
+.global-layout {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas:
+      "navbar--wrapper"
+      "content";
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.navbar--wrapper {
+  grid-area: navbar--wrapper;
+}
+
+.content {
+  grid-area: content;
+  height: 100%;
+}

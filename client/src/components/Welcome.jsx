@@ -1,8 +1,9 @@
+import './Welcome.css'
 
 export default function Welcome(user) {
 
     return (
-        <div>
+        <div className="welcome">
             <p className="main--header">Welcome!</p>
             { user ? (
                 <p className="main--subheader">Select a deck to begin studying.</p>

@@ -10,9 +10,15 @@ export default function Navbar(){
     const navigateToAuthPage = () => {
         navigate('/auth')
     }
+
+    const navigateToHome = () => {
+        navigate('/home')
+    }
     return (
         <div className="navbar">
-            <h3>Logo</h3>
+            <div className="navbar--logo">
+                <p onClick={navigateToHome}>Logo</p>
+            </div>
             <div className="navbar--icons mobile--only">
                 <CircleUserRound
                     onClick={navigateToAuthPage}
@@ -23,7 +29,7 @@ export default function Navbar(){
                 className="navbar--icons desktop--only"
                 onClick={navigateToAuthPage}
             >
-                <CircleUserRound size={25} color={'black'}/>
+                <CircleUserRound size={22} color={'black'}/>
                 <p>Login/Signup</p>
             </div>
         </div>

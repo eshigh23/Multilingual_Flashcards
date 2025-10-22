@@ -4,7 +4,7 @@ import {getWordsApi} from "../api/api"
 import { createCardApi } from "../api/cardApi"
 import CreateDeck from "../components/CreateDeck"
 
-export default function CreateCard({ deckId, addCard }) {
+export default function CreateCard({ deckId, setDeck, setCards, setNumDue }) {
 
     const [searchText, setSearchText] = useState('')
     const [searchResults, setSearchResults] = useState([])
@@ -32,7 +32,9 @@ export default function CreateCard({ deckId, addCard }) {
         try {
             const responseData = await createCardApi({ cardId, deckId })
             console.log("responseDataaaaaaa:", responseData)
-            addCard(responseData.card)
+            setCards(responseData.updatedCards)
+            setDeck(responseData.deck)
+            setNumDue(responseData.numDue)
         } catch (e) {
             console.error(e)
         }

@@ -7,13 +7,15 @@ exports.createDeck = async (req, res) => {
     console.log("user:", user)
 
     try {
-        const newDeck = await Deck.create({
+        await Deck.create({
             user: user.id,
             name: deckName,
             targetLanguage: selectedLanguage
         })
 
-        return res.status(201).json({ newDeck })
+        const updatedDecks = await fetchDecksForUserService(user.id)
+
+        return res.status(201).json({ updatedDecks })
 
     } catch (e) {
         console.error(e)
@@ -22,15 +24,26 @@ exports.createDeck = async (req, res) => {
 }
 
 
-exports.fetchDecks = async (req, res) => {
+exports.fetchDecksForUser = async (req, res) => {
     const user = req.user
 
     try {
-        const decks = await Deck.find({ user: user.id })
+        const decks = await fetchDecksForUserService(user.id)
         return res.status(200).json({ decks })
 
     } catch (e) {
         console.error(e)
         return res.status(500).send()
     }
+}
+
+
+const fetchDecksForUserService = async (userId) => {
+    try {
+        const decks = await Deck.find({ user: userId })
+        return decks
+    } catch (e) {
+        throw new Error('Unable to query decks for the user')
+    }
+
 }

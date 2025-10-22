@@ -31,7 +31,7 @@ export default function Card({ card, popCard }) {
 
             { isFront ? (
                 <div className="flashcard--content">
-                    <p className="flashcard--word">{card.word.sp_word}</p>
+                    <p className="flashcard--word">{card.word.translations[0].article} {card.word.sp_word}</p>
                 </div>
             ) : (
                 <div className="flashcard--content">

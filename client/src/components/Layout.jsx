@@ -1,9 +1,6 @@
 import './Layout.css'
 import { useEffect, useState } from 'react'
 import DeckSidebar from './DeckSidebar';
-import MainSection from './MainSection';
-import DeckPage from '../pages/DeckPage';
-import Navbar from './Navbar';
 import { fetchDecksApi } from '../api/deckApi';
 import { Outlet } from 'react-router-dom';
 

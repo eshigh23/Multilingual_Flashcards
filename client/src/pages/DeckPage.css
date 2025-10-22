@@ -1,4 +1,12 @@
+/* move this to global */
 
+.icon-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* deck page */
 .deck {
     display: flex;
     flex-direction: column;
@@ -18,7 +26,7 @@
 .deck--header {
     display: flex;
     flex-direction: column;
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
     /* border: 1px solid red; */
     text-align: center;
     gap: .5em;
@@ -148,7 +156,7 @@
 
     .deck--header {
         text-align: start;
-        margin-inline: 1rem;
+        /* margin-inline: 1rem; */
     }
 
     .deck--buttons {

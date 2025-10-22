@@ -16,9 +16,13 @@
   grid-area: main;
   height: 100%;
   overflow: hidden;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
+  padding-inline: 0;
 }
 
 @media (min-width: 758px) {
+
   .dashboard-layout {
     grid-template-columns: 250px 1fr;
     grid-template-areas: "sidebar main";
@@ -30,4 +34,10 @@
     height: 100%;
   }
 
+}
+
+@media (min-width: 1028px) {
+  .main {
+      padding-inline: 2rem;
+  }
 }

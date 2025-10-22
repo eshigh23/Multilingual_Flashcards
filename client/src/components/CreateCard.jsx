@@ -2,7 +2,7 @@ import './CreateCard.css'
 import { useEffect, useState } from "react"
 import {getWordsApi} from "../api/api"
 import { createCardApi } from "../api/cardApi"
-import CreateDeck from "../components/CreateDeck"
+import CreateDeck from "./CreateDeckForm"
 
 export default function CreateCard({ deckId, setDeck, setCards, setNumDue }) {
 

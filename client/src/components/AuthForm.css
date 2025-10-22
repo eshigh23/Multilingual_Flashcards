@@ -2,10 +2,9 @@
 .authform {
     display: flex;
     /* height: 100%; */
-    padding-top: 5vh;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid red; */
+    border: 1px solid red;
     gap: 1.5rem;
 }
 

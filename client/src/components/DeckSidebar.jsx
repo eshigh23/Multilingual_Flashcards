@@ -1,7 +1,7 @@
 import './DeckSidebar.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { fetchDecksApi } from '../api/deckApi'
+import { Folder } from 'lucide-react'
 
 
 
@@ -26,7 +26,11 @@ export default function DeckSidebar({ decks }){
         <div className="decksidebar">
             <div className="sidebar--container">
                 <div className="sidebar--decks-container">
-                    <p className="sidebar--header">My Decks</p>
+                    <div className="icon-title">
+                        <Folder color="black" size={24} />
+                        <p className="sidebar--header">My Decks</p>
+                    </div>
+
 
                     { decks && decks.map((deck, i) => (
                         <p

@@ -1,11 +1,17 @@
 import './Navbar.css'
-import { CircleUserRound, Menu } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { CircleUserRound, Folders, Menu } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import MobileDecksList from './MobileDecksList'
+
 
 
 export default function Navbar(){
 
+
     const navigate = useNavigate()
+
+    const [isDecksList, setIsDecksList] = useState(false)
 
     const navigateToAuthPage = () => {
         navigate('/auth')
@@ -23,7 +29,10 @@ export default function Navbar(){
                 <CircleUserRound
                     onClick={navigateToAuthPage}
                     size={25} color={'black'}/>
-                <Menu size={25} color={'black'}/>
+                <Folders 
+                    onClick={() => setIsDecksList(prev => !prev)}
+                    size={25} color={'black'}
+                />
             </div>
             <div 
                 className="navbar--icons desktop--only"
@@ -32,6 +41,12 @@ export default function Navbar(){
                 <CircleUserRound size={22} color={'black'}/>
                 <p>Login/Signup</p>
             </div>
+
+            { isDecksList && (
+                <MobileDecksList
+                    onClose={() => setIsDecksList(false)} 
+                />
+            )}
         </div>
     )
 }

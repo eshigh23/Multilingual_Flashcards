@@ -1,0 +1,50 @@
+
+.mobiledeckslist {
+    position: absolute;
+    top: 50px; 
+    right: 0;
+    height: calc(100vh - 50px);
+    width: 75%;
+    max-width: 250px;
+    background-color: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    /* padding: 1rem; */
+    transition: transform 0.25s ease;
+}
+
+/* modal animation */
+.mobile-decks-list.slide-in {
+  transform: translateX(0);
+}
+
+.mobile-decks-list.hidden {
+  transform: translateX(100%);
+}
+
+
+/* modal content */
+.mobiledeckslist--item {
+
+}
+
+.mobiledeckslist--my-decks {
+    font-weight: 600;
+}
+
+.mobiledeckslist--item {
+    cursor: pointer;
+}
+
+.mobiledeckslist p {
+    padding-inline: 1rem;
+    padding-block: 0.75rem; 
+    border-bottom: 1px solid lightgrey;
+}
+
+
+@media (min-width: 768px) {
+    .mobiledeckslist {
+        display: none;
+    }
+}

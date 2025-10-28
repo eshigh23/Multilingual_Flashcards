@@ -143,22 +143,32 @@ const calculateCardsStudiedToday = async (deckId) => {
     return studiedToday.length
 }
 
+
 const calculatedSpacedRepetition = (card, difficulty) => {
-    const difficultyMap = { 'forgot': 0, 'hard': 1.5, 'okay': 3, 'easy': 4.5 }
+    // const difficultyMap = { 'forgot': 0, 'hard': 1.5, 'okay': 3, 'easy': 4.5 }
+    const difficultyMap = { 'forgot': 0, 'hard': 1, 'okay': 2.5, 'easy': 5 }
     const q = difficultyMap[difficulty]
 
-    // calculate new EF, clamp to minimum 1.3
+    // calculate new EF based on the user's 'difficulty' score 'q'
     console.log("old easiness factor:", card.easinessFactor)
     card.easinessFactor = card.easinessFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02))
+
+    // clamp easiness factor to 1.3 minimum
     if (card.easinessFactor < 1.3) card.easinessFactor = 1.3
 
+    // if card failed
     if (q === 0) {
         card.repetitions = 0     // 0 successful repetitions
         card.interval = 0    // reset interval
     } else {
         card.repetitions += 1
-        if (card.repetitions === 1) {   // if first time reviewing card or card failed
-            card.interval = 1   // set interval to 1
+        if (card.repetitions === 1) {   // if first time reviewing card (or card previously failed)
+            if (q > 1.5) {
+                card.interval = 1
+            } else {
+                card.interval = 0   // set interval to 1: new cards are studied the next day as long as they are okay or easy
+                card.repetitions = 0
+            } 
         }
         else {
             card.interval = Math.round(card.interval * card.easinessFactor)

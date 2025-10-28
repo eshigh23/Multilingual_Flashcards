@@ -27,7 +27,8 @@ export default function Layout() {
 
             <aside className="decksidebar--wrapper">
                 <DeckSidebar
-                    decks={decks} 
+                    decks={decks}
+                    setDecks={setDecks} 
                 />
             </aside>
 

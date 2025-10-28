@@ -15,6 +15,18 @@ export const createDeckApi = async (deckInfo) => {
     }
 }
 
+export const deleteDeckApi = async (deckId) => {
+    try {
+        const response = await axios.delete(`${API_URL}/delete/${deckId}`, {
+            withCredentials: true
+        })
+        return response.data
+        
+    } catch (e) {
+        throw e;
+    }
+}
+
 export const fetchDecksApi = async () => {
     try {
         const response = await axios.get(`${API_URL}/fetchDecks`, {

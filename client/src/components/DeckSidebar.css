@@ -13,17 +13,30 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    /* border: 1px solid red; */
     height: 100%;
+    width: 100%;
+    padding: 1em;
 }
 
 .sidebar--decks-container {
     display: flex;
+    width: 100%;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
+    /* border: 1px solid blue; */
 }
 .sidebar--header {
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.sidebar--deck-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid red; */
+
 }
 
 .sidebar--deckname {

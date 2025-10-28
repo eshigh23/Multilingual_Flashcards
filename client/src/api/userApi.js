@@ -29,7 +29,9 @@ export const fetchUserApi = async () => {
 
 export const loginUserApi = async (userInfo) => {
     try {
-        const response = await axios.post(`${API_URL}/loginUser`, userInfo)
+        const response = await axios.post(`${API_URL}/loginUser`, userInfo, {
+            withCredentials: true
+        })
         return response.data
 
     } catch (e) {

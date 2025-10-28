@@ -23,6 +23,21 @@ exports.createDeck = async (req, res) => {
     }
 }
 
+exports.deleteDeck = async (req, res) => {
+    const { deckId } = req.params
+    const user = req.user
+    console.log("deckId:", deckId)
+
+    try {
+        await Deck.findByIdAndDelete(deckId)
+        const updatedDecks = await fetchDecksForUserService(user.id)
+        return res.status(200).send({ updatedDecks })
+
+    } catch (e) {
+        return res.status(400).send()
+    }
+}
+
 
 exports.fetchDecksForUser = async (req, res) => {
     const user = req.user

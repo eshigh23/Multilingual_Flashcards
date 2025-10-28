@@ -2,12 +2,24 @@ import './DeckSidebar.css'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Folder } from 'lucide-react'
+import { deleteDeckApi } from '../api/deckApi'
+import { Trash } from 'lucide-react'
 
 
 
 /* accepts fetched decks from DashboardLayout.jsx */
-export default function DeckSidebar({ decks }){
+export default function DeckSidebar({ decks, setDecks }){
     const navigate = useNavigate()
+
+    // @todo: eventually move to deck settings
+    const deleteDeck = async (deckId) => {
+        try {
+            const responseData = await deleteDeckApi(deckId)
+            setDecks(responseData.updatedDecks)
+        } catch (e) {
+            console.error(e)
+        }
+    }
 
     const navigateToDeck = (deckId) => {
         navigate(`/deck/${deckId}`)
@@ -33,12 +45,19 @@ export default function DeckSidebar({ decks }){
 
 
                     { decks && decks.map((deck, i) => (
-                        <p
-                            className="sidebar--deckname" 
-                            key={i}
-                            onClick={() => navigateToDeck(deck._id)}
-                        >
-                            {deck.name}</p>
+                        <div className="sidebar--deck-info" key={i}>
+                            <p
+                                className="sidebar--deckname" 
+                                onClick={() => navigateToDeck(deck._id)}
+                            >
+                                {deck.name}
+                            </p>
+                            <Trash
+                                className="icon" 
+                                size={20}
+                                onClick={() => deleteDeck(deck._id)}
+                            />
+                        </div>
                     ))}
                 </div>
                 {/* button here that navigates to create deck page */}

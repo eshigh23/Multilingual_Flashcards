@@ -29,7 +29,7 @@ export default function MobileDecksList({ onClose }) {
     }, [])
 
     return(
-        <div className={`mobile-decks-list ${isVisible ? 'slide-in' : 'hidden'}`}>
+        <div className={`mobiledeckslist`}>
             <p className="mobiledeckslist--my-decks">My decks</p>
             { decks && decks.map(deck => (
                 <div 

@@ -16,7 +16,7 @@ export default function LoginForm() {
         try {
             const responseData = await loginUserApi({ username, password })
             console.log("user logged in.", responseData.user)
-            setUser(useAuth)
+            setUser(responseData.user)
         } catch (e) {
             console.error(e)
         }

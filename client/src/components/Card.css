@@ -45,10 +45,15 @@
     border: 1px solid #595959;
     border-radius: 15px;
     width: 24%;
-    padding: .75em 1.25em;
+    padding: .75em 1em;
     font-weight: 600;
     font-size: 0.87rem;
     cursor: pointer;
+}
+
+.flashcard--days {
+    font-weight: 500;
+    /* font-size: .8rem; */
 }
 
 .flashcard--button.red {

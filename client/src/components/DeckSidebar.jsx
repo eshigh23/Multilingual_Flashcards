@@ -1,7 +1,7 @@
 import './DeckSidebar.css'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Folder } from 'lucide-react'
+import { Folders } from 'lucide-react'
 import { deleteDeckApi } from '../api/deckApi'
 import { Trash } from 'lucide-react'
 
@@ -30,7 +30,7 @@ export default function DeckSidebar({ decks, setDecks }){
     }
 
     useEffect(() => {
-        console.log('deck:', decks)
+        console.log('decks:', decks)
     }, [decks])
 
 
@@ -39,7 +39,7 @@ export default function DeckSidebar({ decks, setDecks }){
             <div className="sidebar--container">
                 <div className="sidebar--decks-container">
                     <div className="icon-title">
-                        <Folder color="black" size={24} />
+                        <Folders color="black" size={24} />
                         <p className="sidebar--header">My Decks</p>
                     </div>
 
@@ -52,11 +52,14 @@ export default function DeckSidebar({ decks, setDecks }){
                             >
                                 {deck.name}
                             </p>
-                            <Trash
-                                className="icon" 
-                                size={20}
-                                onClick={() => deleteDeck(deck._id)}
-                            />
+                            <div className="sidebar--numdue-trash">
+                                <p>{deck.cardsDueToday} due</p>
+                                <Trash
+                                    className="icon" 
+                                    size={15}
+                                    onClick={() => deleteDeck(deck._id)}
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>

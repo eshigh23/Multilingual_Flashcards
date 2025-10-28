@@ -70,7 +70,9 @@ exports.fetchDueCardsFromDeck = async (req, res) => {
 
         const { deck, cards, numDue } = await getDueCardsFromDeckService(deckId)
 
-        return res.status(200).json({ deck, cards, numDue})
+        const deckLength = await Card.countDocuments({ deck: deckId })
+
+        return res.status(200).json({ deck, deckLength, cards, numDue})
 
     } catch (e) {
         console.error(e)

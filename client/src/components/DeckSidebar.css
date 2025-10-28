@@ -23,7 +23,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
     /* border: 1px solid blue; */
 }
 .sidebar--header {
@@ -40,10 +40,23 @@
 }
 
 .sidebar--deckname {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 500;
     text-transform: capitalize;
     cursor: pointer;
 }
 
+.sidebar--numdue-trash {
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    /* border: 1px solid red; */
+    gap: .5em;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.sidebar--numdue-trash p {
+    white-space: nowrap;
+}
 

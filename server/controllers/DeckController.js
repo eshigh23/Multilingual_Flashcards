@@ -55,10 +55,12 @@ exports.fetchDecksForUser = async (req, res) => {
 
 const fetchDecksForUserService = async (userId) => {
     try {
-        const decks = await Deck.find({ user: userId })
+        const decks = await Deck.find({ user: userId }).populate({
+            path: 'cardsDueToday',
+            match: { nextReview: { $lte: new Date() } } // evaluated at query time
+        })  
         return decks
     } catch (e) {
         throw new Error('Unable to query decks for the user')
     }
-
 }

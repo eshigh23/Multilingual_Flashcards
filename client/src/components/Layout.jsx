@@ -21,6 +21,10 @@ export default function Layout() {
         }
         fetchDecks()
     }, [])
+
+    useEffect(() => {
+        console.log("DECKS IN LAYOUT:", decks)
+    }, [decks])
  
     return (
         <div className="dashboard-layout">
@@ -28,7 +32,7 @@ export default function Layout() {
             <aside className="decksidebar--wrapper">
                 <DeckSidebar
                     decks={decks}
-                    setDecks={setDecks} 
+                    setDecks={setDecks}
                 />
             </aside>
 

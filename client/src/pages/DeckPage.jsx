@@ -5,7 +5,7 @@ import CreateCard from '../components/CreateCard'
 import { createDeckApi, fetchDecksApi } from '../api/deckApi'
 import { fetchDueCardsFromDeckApi } from '../api/cardApi'
 import Card from '../components/Card'
-import { BookOpen, CirclePause, CirclePlus, Settings } from 'lucide-react'
+import { BookOpen, CirclePause, CirclePlus, Layers, Settings } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 
 
@@ -17,6 +17,7 @@ export default function DeckPage(){
     const { deckId } = useParams()
 
     const [deck, setDeck] = useState(null)
+    const [deckLength, setDeckLength] = useState(null)
     const [cards, setCards] = useState([])
     const [numDue, setNumDue] = useState(cards?.length || null)
     const [selectedMode, setSelectedMode] = useState("study")
@@ -30,6 +31,7 @@ export default function DeckPage(){
                 const responseData = await fetchDueCardsFromDeckApi(deckId)
                 setCards(responseData.cards ? responseData.cards : [])
                 setDeck(responseData.deck ? responseData.deck : null)
+                setDeckLength(responseData.deckLength)
                 setNumDue(responseData.numDue ? responseData.numDue : null)
                 console.log("cards:", responseData.cards)
                 console.log("deck", responseData.deck)
@@ -56,12 +58,20 @@ export default function DeckPage(){
         console.log("new cards:", cards)
     }, [cards])
 
+    useEffect(() => {
+        console.log("deck:", deck)
+    }, [deck])
+
     return(
         <div className="deck">
             { deck && deckId && (
             <>
             <div className="deck--header">
                 <div className="deck--preheaders">
+                    <div className="deck--preheader">
+                        <Layers size={20} color={'#7C7C7C'} />
+                        <p>{deckLength} card{deckLength === 1 ? '' : 's'} </p>
+                    </div>
                     <div className="deck--preheader" >
                         <CirclePause size={20} color={'#7C7C7C'} />
                         <p>Pause deck</p>
@@ -81,7 +91,7 @@ export default function DeckPage(){
                             onClick={() => setSelectedMode('study')}
                         >
                                 <BookOpen color="black"/>
-                                <p>Study</p>
+                                <p>Study { numDue && `(${numDue})` }</p>
                         </div>
                         <div className={`deck--underline ${selectedMode==='study' ? 'active' : ''}`}></div>
                     </div>
